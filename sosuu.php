@@ -1,25 +1,32 @@
 <?php //素数を求める
 //fscanf(STDIN, "%d", $n);
-
+$ary=[];
 while($line=fgets(STDIN))
 {
+	// if($line<=1){
+	// 	echo "0".PHP_EOL;
+	// } elseif ($line == 2) {
+	// 	echo "1".PHP_EOL;
+	// }
 
-	if($line<=1){
-		echo "{$n} は素数を含みません".PHP_EOL;exit;
-	}
-
-	$ary=[];
+	//$ary=[];
 	$i=0;
-	$cnt=0;
-	for ($i=2; $i < $line; $i++) { 
-		for ($j=2; $j < $i; $j++) { 
+	$cnt=1;
+	for ($i=3; $i <= $line; $i+=2) { 
+		$isPrime=false;
+		for ($j=3; $j <= sqrt($i); $j+=2) { 
 			$mod = $i % $j;
 			if($mod == 0) {
-				continue 2;
+				$isPrime=false;
+				break;
+				//continue 2;
 			}
+			$isPrime=true;
 		}
-		$cnt++;
-		$ary[]=$i;
+		if($isPrime) {
+			$cnt++;
+			$ary[]=$i;
+		}
 	}
 	echo $cnt.PHP_EOL;
 	//o($n,$ary);
