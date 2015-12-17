@@ -28,3 +28,12 @@ function bsearch (array $list,$val) {
 	}
 	return false;
 }
+switch (variable) {
+	case 'value':
+		# code...
+		break;
+	
+	default:
+		# code...
+		break;
+}
