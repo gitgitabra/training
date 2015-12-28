@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+<ModulePrefs title="ランダムに動くシャボン玉たち" />
+<Content type="html">
+<![CDATA[
+<?xml version="1.0" encoding="UTF-8" ?> 
+<script type="text/JavaScript">
+
+	//ボールオブジェクト格納用配列
+	var Balls = new Array();
+	var BallNumber;
+	var direction;
+
+	BallNumber=1;
+	direction=1;
+		
+	//Ballクラスの定義
+    	var Ball = function(BallID) {
+
+		//ボールオブジェクトを識別するための番号。Divのレイヤ名とリンクさせる
+		this.MeBallID =BallID;
+		//クラスメソッドの定義
+		this.MeCreateBall= CreateBall;
+		this.MeMoveBall = MoveBall;
+
+    	}
+
+	//ボールレイヤを画面に生成する処理
+	function CreateBall(BallID){
+
+		//動的にDiv要素を生成する
+		var cBall = document.createElement('div'); 
+		cBall.id = BallID;
+		cBall.style.position = "absolute";
+
+		//0～260の乱数を発生させる
+		var RandLeft = Math.random()*260;
+		var RandTop = Math.random()*260;
+
+		//ボールの初期表示位置
+		cBall.style.left = RandLeft ;
+		cBall.style.top = RandTop ;
+
+		//ボールのイメージ画像を読み込む
+		var BallImg = document.createElement('img'); 
+		BallImg.src = "http://sites.google.com/site/westinthefareast/home/datafiles/syabon-s.gif"; 
+
+		//Divにイメージを組み込む
+		cBall.appendChild(BallImg);
+		//ゲーム画面にボールレイヤ（Div)を組み込む
+		Playfield.appendChild(cBall);
+	}
+
+
+	//ボールを自動で動かす処理（再帰的に呼び出される）
+	function MoveBall(direction,BallID) {
+		var timerobj;
+		//タイマーのカウンタをクリア
+		clearTimeout(timerobj);
+
+
+		//1から10までの整数の乱数を生成する
+		var DirChange = Math.floor(Math.random()*10) + 1;
+
+		//10分の1の確率で方向を変換する
+		if (DirChange == 7){
+			//1から8までの整数の乱数を生成する
+			direction = Math.floor(Math.random()*8) + 1;
+		}
+
+		switch(direction){
+			//左上へ動かす処理
+			case 1:
+				document.getElementById(BallID).style.left = parseInt(document.getElementById(BallID).style.left) - 5;
+		 		document.getElementById(BallID).style.top = parseInt(document.getElementById(BallID).style.top) - 5;
+				break;
+			//右上へ動かす処理
+			case 2:
+				document.getElementById(BallID).style.left = parseInt(document.getElementById(BallID).style.left) + 5;
+		 		document.getElementById(BallID).style.top = parseInt(document.getElementById(BallID).style.top) - 5;
+				break;
+			//右下へ動かす処理
+			case 3:
+				document.getElementById(BallID).style.left = parseInt(document.getElementById(BallID).style.left) + 5;
+		 		document.getElementById(BallID).style.top = parseInt(document.getElementById(BallID).style.top) + 5;
+				break;
+			//左下へ動かす処理
+			case 4:
+				document.getElementById(BallID).style.left = parseInt(document.getElementById(BallID).style.left) - 5;
+		 		document.getElementById(BallID).style.top = parseInt(document.getElementById(BallID).style.top) + 5;
+				break;
+			//左へ動かす処理
+			case 5:
+				document.getElementById(BallID).style.left = parseInt(document.getElementById(BallID).style.left) - 5;
+				break;
+			//右へ動かす処理
+			case 6:
+				document.getElementById(BallID).style.left = parseInt(document.getElementById(BallID).style.left) + 5;
+				break;
+			//下へ動かす処理
+			case 7:
+		 		document.getElementById(BallID).style.top = parseInt(document.getElementById(BallID).style.top) + 5;
+				break;
+			//上へ動かす処理
+			case 8:
+		 		document.getElementById(BallID).style.top = parseInt(document.getElementById(BallID).style.top) - 5;
+				break;
+		}
+
+		//ボールが枠を越えないように制限
+		if (parseInt(document.getElementById(BallID).style.left)>565){
+			document.getElementById(BallID).style.left = 565;
+		}
+
+		if (parseInt(document.getElementById(BallID).style.left)<0){			
+			document.getElementById(BallID).style.left = 0;
+		}
+
+		if (parseInt(document.getElementById(BallID).style.top)<0){
+			document.getElementById(BallID).style.top = 0;
+		}
+
+		if (parseInt(document.getElementById(BallID).style.top)>565){
+			document.getElementById(BallID).style.top = 565;
+		}
+
+		//ボールの移動速度を制御
+		timerobj = setTimeout( "MoveBall(" + direction + ", '" + BallID + "')" ,10 );
+	}
+
+	//BALLボタンクリック時の処理
+ 	function MakeBall() {
+			//ボールオブジェクトを生成して配列に格納する
+			Balls[BallNumber] = new Ball("Ball" + BallNumber);
+			Balls[BallNumber].MeCreateBall(Balls[BallNumber].MeBallID);
+			//ボールの方向制御数値は　１：左上　２：右上　３：右下　４：左下
+			Balls[BallNumber].MeMoveBall(3,Balls[BallNumber].MeBallID);
+
+			//配列内の添え字を1つ増やす
+			BallNumber = BallNumber +1;
+	}
+
+</script>
+
+<form>
+	<div id="Playfield"
+     		style="position:absolute; left:0px; top:0px;
+                width: 600px; height: 600px; border-style: solid; background-color: #000000;">
+	</div>
+
+    	<INPUT TYPE=button value="BALL" onClick="MakeBall()"
+		style="position:absolute; left:10px; top:610px; width:50px;">
+</form>
+]]>
+</Content>
+</Module>

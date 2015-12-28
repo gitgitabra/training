@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<folders>
+    <folder>
+        <title>academy</title>
+        <snippets>
+            <snippet>
+                <title>php -S localhost:8000 -t Downloads/academy/svn/source/webapi/</title>
+                <content>php -S localhost:8000 -t Downloads/academy/svn/source/webapi/</content>
+            </snippet>
+            <snippet>
+                <title>qiBTC5x3</title>
+                <content>qiBTC5x3</content>
+            </snippet>
+            <snippet>
+                <title>mysql -u root -h127.0.0.1 -P3307 -A academy --auto-rehash</title>
+                <content>mysql -u root -h127.0.0.1 -P3307 -A academy --auto-rehash</content>
+            </snippet>
+            <snippet>
+                <title>mysqldump -u root -h127.0.0.1 -P3307 academy &gt; /var/www/academyNanamix/db/academy_20150713.sql</title>
+                <content>mysqldump -u root -h127.0.0.1 -P3307 academy &gt; /var/www/academyNanamix/db/academy_20150713.sql</content>
+            </snippet>
+            <snippet>
+                <title>redis-cli -p 6380 --raw</title>
+                <content>redis-cli -p 6380 --raw</content>
+            </snippet>
+            <snippet>
+                <title>mysql -u root -p -h 127.0.0.1 -A academy --auto-rehash</title>
+                <content>mysql -u root -p -h 127.0.0.1 -A academy --auto-rehash</content>
+            </snippet>
+            <snippet>
+                <title>Q8x5LNY9</title>
+                <content>Q8x5LNY9</content>
+            </snippet>
+            <snippet>
+                <title>SQEX踏み台サーバ</title>
+                <content>ssh academy01@adm.academy.square-enix.co.jp
+
+</content>
+            </snippet>
+            <snippet>
+                <title>踏み台PASS</title>
+                <content>m3ag4ctq</content>
+            </snippet>
+            <snippet>
+                <title>ssh academy01@academy1001b</title>
+                <content>ssh academy01@academy1001b</content>
+            </snippet>
+            <snippet>
+                <title>curl http://nanamix.academy.com/prediction/oldList -F "nativeSessionId=12345678901234567890123456789mix" -F "password=dxumGe~qM&amp;0r^3Mp"</title>
+                <content>curl http://nanamix.academy.com/prediction/oldList -F "nativeSessionId=12345678901234567890123456789mix" -F "password=dxumGe~qM&amp;0r^3Mp"</content>
+            </snippet>
+            <snippet>
+                <title>重複チェックSQL:user_prediction_ans</title>
+                <content>select * from user_prediction_ans where (userId,predictId,number) in (select userId,predictId,number from user_prediction_ans group by userId,predictId,number having count(*)&gt;1);</content>
+            </snippet>
+            <snippet>
+                <title>watch -n1 'mysql -uroot -P3307 -h127.0.0.1 -A academy -e "show full processlist"'</title>
+                <content>watch -n1 'mysql -uroot -P3307 -h127.0.0.1 -A academy -e "show full processlist"'</content>
+            </snippet>
+        </snippets>
+    </folder>
+    <folder>
+        <title>nanami</title>
+        <snippets>
+            <snippet>
+                <title>http://ec2-50-112-141-57.us-west-2.compute.amazonaws.com/</title>
+                <content>http://ec2-50-112-141-57.us-west-2.compute.amazonaws.com/</content>
+            </snippet>
+            <snippet>
+                <title>ssh ec2-50-112-141-57.us-west-2.compute.amazonaws.com</title>
+                <content>ssh ec2-50-112-141-57.us-west-2.compute.amazonaws.com</content>
+            </snippet>
+            <snippet>
+                <title>rsync -auvz jankenman ec2-50-112-141-57.us-west-2.compute.amazonaws.com:/home/ec2-user/moon</title>
+                <content>rsync -auvz jankenman ec2-50-112-141-57.us-west-2.compute.amazonaws.com:/home/ec2-user/moon</content>
+            </snippet>
+            <snippet>
+                <title>php debug code</title>
+                <content>echo '&lt;pre&gt;';
+var_dump();
+echo '&lt;/pre&gt;';
+exit;</content>
+            </snippet>
+            <snippet>
+                <title>serverman nanami login</title>
+                <content>ssh nanami@27.120.109.27 -p 773</content>
+            </snippet>
+            <snippet>
+                <title>serverman pass</title>
+                <content>NZM73Pti</content>
+            </snippet>
+            <snippet>
+                <title>mysql alter type modified</title>
+                <content>ALTER TABLE tbl MODIFY col type;</content>
+            </snippet>
+            <snippet>
+                <title>mysql alter add column</title>
+                <content>ALTER TABLE table ADD COLUMN col type AFTER col;</content>
+            </snippet>
+            <snippet>
+                <title>takachiko73@gmail.com</title>
+                <content>takachiko73@gmail.com</content>
+            </snippet>
+            <snippet>
+                <title>svn log --limit 3 -v .</title>
+                <content>svn log --limit 3 -v .</content>
+            </snippet>
+            <snippet>
+                <title>svn commit -m "" &amp;&amp; svn update</title>
+                <content>svn commit -m "" &amp;&amp; svn update</content>
+            </snippet>
+            <snippet>
+                <title>curl -kL 'https://dev-api.yogensha.jp/prediction/list' -o /dev/null -w "%{http_code}\t%{time_total}" 2&gt; /dev/null</title>
+                <content>curl -kL 'https://dev-api.yogensha.jp/prediction/list' -o /dev/null -w "%{http_code}\t%{time_total}" 2&gt; /dev/null</content>
+            </snippet>
+            <snippet>
+                <title>mysql csv import</title>
+                <content>LOAD DATA INFILE "/var/www/academyNanamix/db/mst_arcana_skill.csv" INTO TABLE mst_arcana_skill FIELDS TERMINATED BY "," LINES TERMINATED BY "\n";</content>
+            </snippet>
+            <snippet>
+                <title>mysql 乱数 小数第一位</title>
+                <content>select truncate(1+RAND()*9,1);</content>
+            </snippet>
+        </snippets>
+    </folder>
+    <folder>
+        <title>rsr</title>
+        <snippets>
+            <snippet>
+                <title>8c~6^z@a&lt;</title>
+                <content>8c~6^z@a&lt;</content>
+            </snippet>
+            <snippet>
+                <title>ssh -p 30025 nobuyuki_k_moonisland@sr0.apdev.jp;</title>
+                <content>ssh -p 30025 nobuyuki_k_moonisland@sr0.apdev.jp;</content>
+            </snippet>
+            <snippet>
+                <title>mysql -u rsr -p --auto-rehash</title>
+                <content>mysql -u rsr -p --auto-rehash</content>
+            </snippet>
+            <snippet>
+                <title>batch hoten</title>
+                <content>nice -n 0 ./console/exec.sh server support present_all 401 10 batch ios</content>
+            </snippet>
+            <snippet>
+                <title>select count(*) from user_message_shard UNION ALL select count(*) as "0001" from user_message_shard0001 UNION ALL select count(*) as "0101" from user_message_shard0101;</title>
+                <content>select count(*) from user_message_shard UNION ALL select count(*) as "0001" from user_message_shard0001 UNION ALL select count(*) as "0101" from user_message_shard0101;</content>
+            </snippet>
+            <snippet>
+                <title>batch ranking</title>
+                <content>nice -n 0 ./console/exec.sh server event RankingBatch</content>
+            </snippet>
+            <snippet>
+                <title>git rm 一発</title>
+                <content>git rm $(git ls-files --deleted)</content>
+            </snippet>
+            <snippet>
+                <title>table定義のみdump (mysqldump)</title>
+                <content>mysqldump -u rangers rangers テーブル名 -p -d &gt; ../dump.txt</content>
+            </snippet>
+            <snippet>
+                <title>fatal error log</title>
+                <content>select * from fatal_error_log order by created desc limit 5;</content>
+            </snippet>
+            <snippet>
+                <title>user_id:1000142</title>
+                <content>90A7E038-626D-4BD9-A813-FD09F0C8753A</content>
+            </snippet>
+            <snippet>
+                <title>user_id:1000184</title>
+                <content>C62ED90F-7EB5-4BD8-B587-6CE6F6855DA2</content>
+            </snippet>
+        </snippets>
+    </folder>
+</folders>
