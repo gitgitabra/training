@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+    <title>BreakOut</title>
+    <style>
+    	* { padding: 0; margin: 0; }
+    	canvas { background: #eee; display: block; margin: 0 auto; }
+    </style>
+</head>
+<body>
+	<canvas id="myCanvas" width="300" height="250"></canvas>
+	<script type="text/javascript">
+		// onload=function(){
+		// 	console.log('onload');
+		// 	init();
+		// }
+		// init=function(){
+		// 	console.log("init");
+		// 	var myCanvas = document.getElementById("myCanvas");
+		// 	console.info(myCanvas);
+		// 	var ctx = myCanvas.getContext("2d");
+		// 	console.info(ctx);
+		// 	draw(myCanvas,ctx);
+		// }
+		var canvas = document.getElementById("myCanvas");
+		var ctx = canvas.getContext("2d");
+		var ballRadius = 10;
+		var x = canvas.width/2;
+		var y = canvas.height-30;
+		var dx = 2;
+		var dy = -2;
+		var paddleHeight = 10;
+		var paddleWidth = 75;
+		var paddleX = (canvas.width-paddleWidth)/2;
+		var rightPressed = false;
+		var leftPressed = false;
+
+		document.addEventListener("keydown", keyDownHandler, false);
+		document.addEventListener("keyup", keyUpHandler, false);
+
+		function keyDownHandler(e) {
+		    if(e.keyCode == 39) {
+		        rightPressed = true;
+		    }
+		    else if(e.keyCode == 37) {
+		        leftPressed = true;
+		    }
+		}
+		function keyUpHandler(e) {
+		    if(e.keyCode == 39) {
+		        rightPressed = false;
+		    }
+		    else if(e.keyCode == 37) {
+		        leftPressed = false;
+		    }
+		}
+		function drawBall() {
+		    ctx.beginPath();
+		    ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+		    ctx.fillStyle = "#0095DD";
+		    ctx.fill();
+		    ctx.closePath();
+		}
+		function drawPaddle() {
+		    ctx.beginPath();
+		    ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
+		    ctx.fillStyle = "#0095DD";
+		    ctx.fill();
+		    ctx.closePath();
+		}
+
+		function draw() {
+		    ctx.clearRect(0, 0, canvas.width, canvas.height);
+		    drawBall();
+		    drawPaddle();
+		    // ボールが右の壁　もしくは　左の壁に当たったら
+		    if (x+dx > canvas.width-ballRadius || x+dx < ballRadius) {
+		    	// xの向きを変える
+		    	dx=-dx;
+		    }
+		    // ボールが上の壁に当たったら
+		    if (y+dy < ballRadius) {
+		    	// yの向きを変える
+		    	dy=-dy;
+		    }
+		    // ボールが下の壁に当たったら
+		    else if (y+dy > canvas.height - ballRadius) {
+		    	// ボールがバーの左端より右側　かつ　バーの右端より左側にあったら
+		    	if (x > paddleX && x < paddleX + paddleWidth) {
+		    		// yの向きを変える
+		    		dy=-dy;
+		    	} else {
+		    		alert("GAME OVER");
+		    		document.location.reload();
+		    	}
+		    }
+		    
+		    if (rightPressed && paddleX<canvas.width- paddleWidth) {
+		    	paddleX += 7;
+		    } else if (leftPressed && paddleX>0) {
+		    	paddleX -= 7;
+		    }
+		    x += dx;
+		    y += dy;
+		}
+
+		setInterval(draw, 10);
+
+
+
+		var lesson1=function(){
+			//rectangle
+			ctx.beginPath();
+			ctx.rect(20, 40, 50, 50);
+			ctx.fill();
+			ctx.closePath();
+
+			//cercle
+			ctx.beginPath();
+			ctx.arc(240, 160, 20, 0, Math.PI*2, false);
+			ctx.fillStyle="green";
+			ctx.fill();
+			ctx.closePath();
+
+			//rectagle (stroke 枠線のみ)
+			ctx.beginPath();
+			ctx.rect(160, 10, 100, 40);
+			ctx.strokeStyle = "rgba(0, 0, 255, 0.5)";
+			ctx.stroke();
+			ctx.closePath();
+		}
+	</script>
+</body>
+</html>
