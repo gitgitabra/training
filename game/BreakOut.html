@@ -11,18 +11,6 @@
 <body>
 	<canvas id="myCanvas" width="300" height="250"></canvas>
 	<script type="text/javascript">
-		// onload=function(){
-		// 	console.log('onload');
-		// 	init();
-		// }
-		// init=function(){
-		// 	console.log("init");
-		// 	var myCanvas = document.getElementById("myCanvas");
-		// 	console.info(myCanvas);
-		// 	var ctx = myCanvas.getContext("2d");
-		// 	console.info(ctx);
-		// 	draw(myCanvas,ctx);
-		// }
 		var canvas = document.getElementById("myCanvas");
 		var ctx = canvas.getContext("2d");
 		var ballRadius = 10;
@@ -35,6 +23,21 @@
 		var paddleX = (canvas.width-paddleWidth)/2;
 		var rightPressed = false;
 		var leftPressed = false;
+		var brickRowCount = 3;
+		var brickColumnCount = 5;
+		var brickWidth = 50;
+		var brickHeight = 15;
+		var brickPadding = 10;
+		var brickOffsetTop = 10;
+		var brickOffsetLeft = 5;
+
+		var bricks = [];
+		for(c=0; c<brickColumnCount; c++) {
+		    bricks[c] = [];
+		    for(r=0; r<brickRowCount; r++) {
+		        bricks[c][r] = { x: 0, y: 0 };
+		    }
+		}
 
 		document.addEventListener("keydown", keyDownHandler, false);
 		document.addEventListener("keyup", keyUpHandler, false);
@@ -55,6 +58,22 @@
 		        leftPressed = false;
 		    }
 		}
+		function drawBricks() {
+		    for(c=0; c<brickColumnCount; c++) {
+		        for(r=0; r<brickRowCount; r++) {
+		            var brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
+		            var brickY = (r*(brickHeight+brickPadding))+brickOffsetTop;
+		            bricks[c][r].x = brickX;
+		            bricks[c][r].y = brickY;
+		            ctx.beginPath();
+		            ctx.rect(brickX, brickY, brickWidth, brickHeight);
+		            ctx.fillStyle = "#0095DD";
+		            ctx.fill();
+		            ctx.closePath();
+		        }
+		    }
+		}
+
 		function drawBall() {
 		    ctx.beginPath();
 		    ctx.arc(x, y, ballRadius, 0, Math.PI*2);
@@ -72,6 +91,7 @@
 
 		function draw() {
 		    ctx.clearRect(0, 0, canvas.width, canvas.height);
+		    drawBricks();
 		    drawBall();
 		    drawPaddle();
 		    // ボールが右の壁　もしくは　左の壁に当たったら
@@ -106,30 +126,6 @@
 		}
 
 		setInterval(draw, 10);
-
-
-
-		var lesson1=function(){
-			//rectangle
-			ctx.beginPath();
-			ctx.rect(20, 40, 50, 50);
-			ctx.fill();
-			ctx.closePath();
-
-			//cercle
-			ctx.beginPath();
-			ctx.arc(240, 160, 20, 0, Math.PI*2, false);
-			ctx.fillStyle="green";
-			ctx.fill();
-			ctx.closePath();
-
-			//rectagle (stroke 枠線のみ)
-			ctx.beginPath();
-			ctx.rect(160, 10, 100, 40);
-			ctx.strokeStyle = "rgba(0, 0, 255, 0.5)";
-			ctx.stroke();
-			ctx.closePath();
-		}
 	</script>
 </body>
 </html>
